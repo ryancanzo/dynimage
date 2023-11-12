@@ -1,8 +1,8 @@
 <?php
 
 // Configuration
-$remote_domain = getenv('ORIGIN_URL'); // Potentially change to environment variable
-$local_path = '/path/to/local/storage/';
+$origin_url = getenv('ORIGIN_URL'); // Base URL for origin server
+$local_path = getenv('LOCAL_PATH') ?? $_SERVER["DOCUMENT_ROOT"]; // Base path to save files locally
 $max_size = 8192; // Max width in pixels
 
 // Parse the request
@@ -21,11 +21,11 @@ if (isset($dyn_quality)) $prepend_path.= "/q/" . $dyn_quality;
 
 // Define the local and remote file paths
 $local_file_path = $local_path . $prepend_path . $uri;
-$remote_file_path = 'http://' . $remote_domain . $uri;
+$remote_file_path = 'http://' . $origin_url . $uri;
 
-// Function resizes an image proportionally based to the max size in any direction
+// Function resizes an image proportionally based on the max size in any direction
 function resize_image ($image, $size) {
-    // Determine pixel size of original image
+    // Get pixel dims of original image
     $width = imagesx($image); 
     $height = imagesy($image);
 
