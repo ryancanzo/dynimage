@@ -6,7 +6,7 @@ A script that returns a file from another domain with optional resizing and comp
 - Server configured to route all requests to index.php
 - Environment variable for ORIGIN_URL with the value of the origin URL.
 
-# Options
+## Options
 
 All options are set via URL parameter.
 
