@@ -1,7 +1,7 @@
 <?php
 
 // Configuration
-$remote_domain = getenv('REMOTE_DOMAIN'); // Potentially change to environment variable
+$remote_domain = getenv('ORIGIN_URL'); // Potentially change to environment variable
 $local_path = '/path/to/local/storage/';
 $max_size = 8192; // Max width in pixels
 
