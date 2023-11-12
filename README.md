@@ -4,14 +4,15 @@ A script that returns a file from another domain with optional resizing and comp
 
 ## Requirements
 - Server configured to route all requests to index.php
-- Environment variable for ORIGIN_URL with the value of the origin URL.
+- Environment variable for ORIGIN_URL with the value of the origin URL
+- GD image extension enabled for PHP
 
 ## Options
 
 All options are set via URL parameter.
 
-- s = An integer representing the desired size of the longest edge of the image.
-- q = An integer from 0 to 100, defaults to 75 for JPG.
+- s = An integer representing the desired size of the longest edge of the image
+- q = An integer from 0 to 100, defaults to 75 for JPG
 
 ## Usage
 
