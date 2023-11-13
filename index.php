@@ -108,7 +108,7 @@ if (!file_exists($local_file_path)) {
         // Apply resizing
         if (isset($dyn_size)) {
             // Function resizes an image proportionally based on the max size in any direction
-            function resize_image ($image, $size) {
+            function resize_image ($image, $size, $transparency = false) {
                 // Get pixel dims of original image
                 $width = imagesx($image); 
                 $height = imagesy($image);
@@ -122,12 +122,19 @@ if (!file_exists($local_file_path)) {
 
                 // Create a new image
                 $new_image = imagecreatetruecolor($new_width, $new_height);
+                if ($transparency) {
+                    // Preserve PNG transparency
+                    imagealphablending($new_image, false);
+                    imagesavealpha($new_image, true);
+                    $transparent = imagecolorallocatealpha($new_image, 0, 0, 0, 127);
+                    imagefilledrectangle($new_image, 0, 0, $new_width, $new_height, $transparent);
+                }
                 imagecopyresampled($new_image, $image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
                 
                 // Return the new image
                 return $new_image;
             }
-            $image = resize_image($image, $dyn_size);
+            $image = resize_image($image, $dyn_size, $file_extension == 'png' ? true : false);
         }
 
         // Save the processed image
