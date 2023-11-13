@@ -13,7 +13,8 @@ if ($dyn_size > $max_size) $dyn_size = $max_size;
 // Parse the request
 $uri = $_SERVER['REQUEST_URI'];
 $file_extension = strtolower(pathinfo($uri, PATHINFO_EXTENSION));
-$file_extension = reset(explode('?', $file_extension)); // Remove query string
+$parts = explode('?', $file_extension);
+$file_extension = reset($parts);
 
 // Parse CloudFlare's image resizing format
 function parse_cf_options($uri) {
