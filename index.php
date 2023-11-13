@@ -101,6 +101,7 @@ if (!file_exists($local_file_path)) {
     // If the file is an image and it's to be resized or compressed
     if (in_array($file_extension, ['jpg', 'jpeg', 'png']) && (isset($_GET["s"]) || isset($_GET["q"]))) {
         $image = imagecreatefromstring($file_content);
+        $file_content = null;
         if (!$image) {
             die('Invalid image file');
         }
@@ -153,6 +154,7 @@ if (!file_exists($local_file_path)) {
     } else {
         // For non-image files or SVG, just save the file as is
         file_put_contents($local_file_path, $file_content);
+        $file_content = null;
     }
 }
 
