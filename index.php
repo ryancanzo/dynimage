@@ -72,8 +72,8 @@ if (count($cf_options) > 0) {
 // Processed files are saved in different location
 $prepend_path = "";
 if (in_array($file_extension, ['jpg', 'jpeg', 'png'])) {
-    if (isset($dyn_size)) $prepend_path .= "/s/" . $dyn_size;
-    if (isset($dyn_quality)) $prepend_path .= "/q/" . $dyn_quality;
+    if (isset($_GET["s"])) $prepend_path .= "/s/" . $dyn_size;
+    if (isset($_GET["q"])) $prepend_path .= "/q/" . $dyn_quality;
 }
 
 // Define the local and remote file paths
@@ -155,6 +155,7 @@ if (!file_exists($local_file_path)) {
         // For non-image files or SVG, just save the file as is
         file_put_contents($local_file_path, $file_content);
         $file_content = null;
+        clearstatcache(true, $local_file_path);
     }
 }
 
@@ -205,6 +206,7 @@ switch ($file_extension) {
         header('Content-Type: application/octet-stream');
         break;
 }
+
 
 readfile($local_file_path);
 
