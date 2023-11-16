@@ -94,6 +94,7 @@ if (!file_exists($local_file_path)) {
     if (!is_dir($directory)) {
         // Attempt to create the directory
         if (!mkdir($directory, 0755, true)) {
+            header("HTTP/1.0 500 Internal Server Error");
             die('Failed to create directories...');
         }
     }
@@ -103,6 +104,7 @@ if (!file_exists($local_file_path)) {
         $image = imagecreatefromstring($file_content);
         $file_content = null;
         if (!$image) {
+            header("HTTP/1.0 500 Internal Server Error");
             die('Invalid image file');
         }
 
@@ -209,5 +211,3 @@ switch ($file_extension) {
 
 
 readfile($local_file_path);
-
-?>
